@@ -1,38 +1,38 @@
 # Data
 id = 0
 events = [
-  { id:(id = id.next),
-    start_date:"2021-11-15T00:00:00-05:00",
+  { id: (id = id.next),
+    start_date: "2021-11-15T00:00:00-05:00",
     title: "Ruby Basics 1",
     end_date: "",
-    notes:"Ruby Basics 1 notes",
+    notes: "Ruby Basics 1 notes",
     guests: %w[Teddy Codeka],
     calendar: "web-dev" },
   { id: (id = id.next),
     start_date: "2021-11-15T12:00:00-05:00",
     title: "English Course",
     end_date: "2021-11-15T13:30:00-05:00",
-    notes:"English notes",
-    guests:["Stephanie"],
+    notes: "English notes",
+    guests: ["Stephanie"],
     calendar: "english" },
-  { id:(id = id.next),
+  { id: (id = id.next),
     start_date: "2021-11-16T00:00:00-05:00",
     title: "Ruby Basics 2",
     end_date: "",
     notes: "Ruby Basics 2 notes",
     guests: %w[Andre Codeka],
     calendar: "web-dev" },
-  { id:(id = id.next),
+  { id: (id = id.next),
     start_date: "2021-11-16T12:45:00-05:00",
     title: "Soft Skills - Mindsets",
     end_date: "2021-11-15T13:30:00-05:00",
-    notes:"Some extra notes",
+    notes: "Some extra notes",
     guests: ["Diego"],
     calendar: "soft-skills" },
-  { id:(id = id.next),
+  { id: (id = id.next),
     start_date: "2021-11-17T00:00:00-05:00",
-    title:"Ruby Methods",
-    end_date:"",
+    title: "Ruby Methods",
+    end_date: "",
     notes: "Ruby Methods notes",
     guests: %w[Diego Andre Teddy Codeka],
     calendar: "web-dev" },
@@ -41,35 +41,35 @@ events = [
     title: "English Course",
     end_date: "2021-11-15T13:30:00-05:00",
     notes: "English notes",
-    guests:["Stephanie"],
-    calendar:"english" },
-  { id:(id = id.next),
-    start_date:"2021-11-18T09:00:00-05:00",
+    guests: ["Stephanie"],
+    calendar: "english" },
+  { id: (id = id.next),
+    start_date: "2021-11-18T09:00:00-05:00",
     title: "Summary Workshop",
     end_date: "2021-11-19T13:30:00-05:00",
     notes: "A lot of notes",
-    guests:%w[Diego Teddy Andre Codeka],
-    calendar:"web-dev" },
+    guests: %w[Diego Teddy Andre Codeka],
+    calendar: "web-dev" },
   { id: (id = id.next),
     start_date: "2021-11-18T09:00:00-05:00",
-    title:"Extended Project",
+    title: "Extended Project",
     end_date: "",
-    notes:"",
+    notes: "",
     guests: [],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date:"2021-11-19T09:00:00-05:00",
+    start_date: "2021-11-19T09:00:00-05:00",
     title: "Extended Project",
-    end_date:"",
+    end_date: "",
     notes: "",
     guests: [],
-    calendar:"web-dev" },
+    calendar: "web-dev" },
   { id: (id = id.next),
     start_date: "2021-11-19T12:00:00-05:00",
-    title:"English for Engineers",
+    title: "English for Engineers",
     end_date: "2021-11-19T13:30:00-05:00",
     notes: "English notes",
-    guests:["Stephanie"],
+    guests: ["Stephanie"],
     calendar: "english" },
   { id: (id = id.next),
     start_date: "2021-11-20T10:00:00-05:00",
@@ -88,17 +88,17 @@ events = [
   { id: (id = id.next),
     start_date: "2021-11-25T09:00:00-05:00",
     title: "Extended Project",
-    end_date:"",
+    end_date: "",
     notes: "",
     guests: [],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date:"2021-11-26T09:00:00-05:00",
+    start_date: "2021-11-26T09:00:00-05:00",
     title: "Extended Project",
     end_date: "",
     notes: "",
     guests: [],
-    calendar:"web-dev" }, 
+    calendar: "web-dev" }
 ]
 
 # Methods
@@ -110,12 +110,9 @@ def list_calendar(events)
   end
 end
 
-def delete_events(ids,events)
-   events.delete_if{ |event| ids == event[:id]}
-    
+def delete_events(ids, events)
+  events.delete_if { |event| ids == event[:id] }[0]
 end
-
-list_calendar(events)
 
 def print_menu
   puts "-" * 60
@@ -125,7 +122,6 @@ def print_menu
   gets.chomp.strip
 end
 
-
 def show_list(id, events)
   event_details = events.select { |event| event[:id] == id }[0]
   puts "start_date : #{event_details[:start_date]}"
@@ -133,11 +129,8 @@ def show_list(id, events)
 end
 
 # Main Program
-list_calendar
-events.each do |event|
-    puts " #{event[:start_date]}         #{event[:title]} (#{event[:id]})"
-end
 
+list_calendar(events)
 action = nil
 while action != "exit"
   action = print_menu
@@ -154,11 +147,10 @@ while action != "exit"
   when "update"
     puts ""
   when "delete"
-   print "Id: "
+    print "Id: "
     show_id = gets.chomp.to_i
-    delete_events(show_id,events)
-    p events 
-    list_calendar
+    delete_events(show_id, events)
+    list_calendar(events)
   when "next"
     puts ""
   when "prev"
@@ -170,9 +162,8 @@ while action != "exit"
   end
 end
 
- start_date = events[0][:start_date] 
- fecha = DateTime.parse(start_date)
- hoy = DateTime.now
- p fecha
- p hoy.strftime('%a %b %d')
-
+# start_date = events[0][:start_date]
+# fecha = DateTime.parse(start_date)
+# hoy = DateTime.now
+# p fecha
+# p hoy.strftime('%a %b %d')
