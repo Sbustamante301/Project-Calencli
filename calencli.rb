@@ -110,7 +110,13 @@ def list_calendar(events)
   end
 end
 
+def delete_events(ids,events)
+   events.delete_if{ |event| ids == event[:id]}
+    
+end
+
 list_calendar(events)
+
 def print_menu
   puts "-" * 60
   puts "list | create | show | update | delete | next | prev | exit"
@@ -119,6 +125,7 @@ def print_menu
   gets.chomp.strip
 end
 
+
 def show_list(id, events)
   event_details = events.select { |event| event[:id] == id }[0]
   puts "start_date : #{event_details[:start_date]}"
@@ -126,6 +133,10 @@ def show_list(id, events)
 end
 
 # Main Program
+list_calendar
+events.each do |event|
+    puts " #{event[:start_date]}         #{event[:title]} (#{event[:id]})"
+end
 
 action = nil
 while action != "exit"
@@ -143,7 +154,11 @@ while action != "exit"
   when "update"
     puts ""
   when "delete"
-    puts ""
+   print "Id: "
+    show_id = gets.chomp.to_i
+    delete_events(show_id,events)
+    p events 
+    list_calendar
   when "next"
     puts ""
   when "prev"
@@ -155,12 +170,9 @@ while action != "exit"
   end
 end
 
-# require 'date'
-
-# start_date = events[0][:start_date]
-# fecha = DateTime.parse(start_date)
-# hoy = DateTime.now
-# p fecha
-# p hoy.strftime('%a %b %d')
-
+ start_date = events[0][:start_date] 
+ fecha = DateTime.parse(start_date)
+ hoy = DateTime.now
+ p fecha
+ p hoy.strftime('%a %b %d')
 
