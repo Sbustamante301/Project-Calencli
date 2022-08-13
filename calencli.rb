@@ -1,5 +1,8 @@
 # Data
+require "date"
+
 id = 0
+
 events = [
   { id: (id = id.next),
     start_date: "2021-11-15T00:00:00-05:00",
@@ -106,7 +109,7 @@ events = [
 def list_calendar(events)
   puts "#{'-' * 29}Welcome to CalenCLI#{'-' * 30}\n\n"
   events.each do |event|
-    puts " #{event[:start_date]}                #{event[:title]} (#{event[:id]})\n\n"
+    puts " #{event[:start_date]}                #{event[:end_date]} #{event[:title]} (#{event[:id]})\n\n"
   end
 end
 
@@ -115,9 +118,8 @@ def delete_events(ids, events)
 end
 
 def print_menu
-  puts "-" * 60
-  puts "list | create | show | update | delete | next | prev | exit"
-  puts "\n"
+  puts "-" * 78
+  puts "list | create | show | update | delete | next | prev | exit\n\n"
   print "action: "
   gets.chomp.strip
 end
@@ -126,6 +128,39 @@ def show_list(id, events)
   event_details = events.select { |event| event[:id] == id }[0]
   puts "start_date : #{event_details[:start_date]}"
   puts "     title : #{event_details[:title]}"
+  puts "  end_date : #{event_details[:end_date]}"
+  puts "     notes : #{event_details[:notes]}"
+  puts "    guests : #{event_details[:guests]}"
+  puts "  calendar : #{event_details[:calendar]}"
+end
+
+def create_event(events, new_event)
+  events.push(new_event)
+end
+
+def update_event(id, events)
+  print "date: "
+  date = gets.chomp
+  print "title: "
+  title = gets.chomp
+  print "calendar: "
+  calendar = gets.chomp
+  print "start_end: "
+  start_end = gets.chomp
+  start_end = start_end.split
+  print "Notes: "
+  notes = gets.chomp
+  print "guests: "
+  guests = gets.chomp
+
+  index = events.find_index { |event| event[:id] == id }
+
+  events[index][:start_date] = date
+  events[index][:title] = title
+  events[index][:end_date] = start_end
+  events[index][:notes] = notes
+  events[index][:guests] = guests
+  events[index][:calendar] = calendar
 end
 
 # Main Program
@@ -137,20 +172,47 @@ while action != "exit"
 
   case action
   when "list"
-    puts ""
+    list_calendar(events)
   when "create"
-    puts ""
+    print "date: "
+    date = gets.chomp
+    print "title: "
+    title = gets.chomp
+    print "calendar: "
+    calendar = gets.chomp
+    print "start_end: "
+    start_end = gets.chomp
+    start_end = start_end.split
+
+    print "Notes: "
+    notes = gets.chomp
+    print "guests: "
+    guests = gets.chomp
+
+    new_event = {
+      id: (id = id.next),
+      start_date: "#{date}T#{start_end[0]}:00-05:00",
+      title: title,
+      end_date: start_end,
+      notes: notes,
+      guests: guests,
+      calendar: calendar
+    }
+
+    create_event(events, new_event)
   when "show"
     print "Event Id: "
     show_id = gets.chomp.to_i
     show_list(show_id, events)
   when "update"
-    puts ""
+    print "Event Id: "
+    update_id = gets.chomp.to_i
+
+    update_event(id, events)
   when "delete"
     print "Id: "
     show_id = gets.chomp.to_i
     delete_events(show_id, events)
-    list_calendar(events)
   when "next"
     puts ""
   when "prev"
