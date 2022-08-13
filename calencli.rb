@@ -5,98 +5,98 @@ id = 0
 
 events = [
   { id: (id = id.next),
-    start_date: "2021-11-15T00:00:00-05:00",
+    start_date: "2022-08-01T00:00:00-05:00",
     title: "Ruby Basics 1",
     end_date: "",
     notes: "Ruby Basics 1 notes",
     guests: %w[Teddy Codeka],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date: "2021-11-15T12:00:00-05:00",
+    start_date: "2022-08-05T12:00:00-05:00",
     title: "English Course",
-    end_date: "2021-11-15T13:30:00-05:00",
+    end_date: "2022-08-10T13:30:00-05:00",
     notes: "English notes",
     guests: ["Stephanie"],
     calendar: "english" },
   { id: (id = id.next),
-    start_date: "2021-11-16T00:00:00-05:00",
+    start_date: "2022-08-11T00:00:00-05:00",
     title: "Ruby Basics 2",
     end_date: "",
     notes: "Ruby Basics 2 notes",
     guests: %w[Andre Codeka],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date: "2021-11-16T12:45:00-05:00",
+    start_date: "2022-08-11T12:45:00-05:00",
     title: "Soft Skills - Mindsets",
-    end_date: "2021-11-15T13:30:00-05:00",
+    end_date: "2022-08-08T13:30:00-05:00",
     notes: "Some extra notes",
     guests: ["Diego"],
     calendar: "soft-skills" },
   { id: (id = id.next),
-    start_date: "2021-11-17T00:00:00-05:00",
+    start_date: "2022-08-11T00:00:00-05:00",
     title: "Ruby Methods",
     end_date: "",
     notes: "Ruby Methods notes",
     guests: %w[Diego Andre Teddy Codeka],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date: "2021-11-17T12:00:00-05:00",
+    start_date: "2022-08-12T12:00:00-05:00",
     title: "English Course",
-    end_date: "2021-11-15T13:30:00-05:00",
+    end_date: "2022-08-12T13:30:00-05:00",
     notes: "English notes",
     guests: ["Stephanie"],
     calendar: "english" },
   { id: (id = id.next),
-    start_date: "2021-11-18T09:00:00-05:00",
+    start_date: "2022-08-12T09:00:00-05:00",
     title: "Summary Workshop",
-    end_date: "2021-11-19T13:30:00-05:00",
+    end_date: "2022-08-12T13:30:00-05:00",
     notes: "A lot of notes",
     guests: %w[Diego Teddy Andre Codeka],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date: "2021-11-18T09:00:00-05:00",
+    start_date: "2022-08-13T09:00:00-05:00",
     title: "Extended Project",
     end_date: "",
     notes: "",
     guests: [],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date: "2021-11-19T09:00:00-05:00",
+    start_date: "2022-08-14T09:00:00-05:00",
     title: "Extended Project",
     end_date: "",
     notes: "",
     guests: [],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date: "2021-11-19T12:00:00-05:00",
+    start_date: "2022-08-15T12:00:00-05:00",
     title: "English for Engineers",
-    end_date: "2021-11-19T13:30:00-05:00",
+    end_date: "2022-08-15T13:30:00-05:00",
     notes: "English notes",
     guests: ["Stephanie"],
     calendar: "english" },
   { id: (id = id.next),
-    start_date: "2021-11-20T10:00:00-05:00",
+    start_date: "2022-08-16T10:00:00-05:00",
     title: "Breakfast with my family",
-    end_date: "2021-11-20T11:00:00-05:00",
+    end_date: "2022-08-16T11:00:00-05:00",
     notes: "",
     guests: [],
     calendar: "default" },
   { id: (id = id.next),
-    start_date: "2021-11-20T15:00:00-05:00",
+    start_date: "2022-08-13T15:00:00-05:00",
     title: "Study",
-    end_date: "2021-11-20T20:00:00-05:00",
+    end_date: "2022-08-13T20:00:00-05:00",
     notes: "",
     guests: [],
     calendar: "default" },
   { id: (id = id.next),
-    start_date: "2021-11-25T09:00:00-05:00",
+    start_date: "2022-08-18T09:00:00-05:00",
     title: "Extended Project",
     end_date: "",
     notes: "",
     guests: [],
     calendar: "web-dev" },
   { id: (id = id.next),
-    start_date: "2021-11-26T09:00:00-05:00",
+    start_date: "2022-08-19T09:00:00-05:00",
     title: "Extended Project",
     end_date: "",
     notes: "",
@@ -108,9 +108,7 @@ events = [
 
 def list_calendar(events)
   puts "#{'-' * 29}Welcome to CalenCLI#{'-' * 30}\n\n"
-  events.each do |event|
-    puts " #{event[:start_date]}                #{event[:end_date]} #{event[:title]} (#{event[:id]})\n\n"
-  end
+ 
 end
 
 def delete_events(ids, events)
@@ -126,7 +124,7 @@ end
 
 def show_list(id, events)
   event_details = events.select { |event| event[:id] == id }[0]
-  puts "start_date : #{event_details[:start_date]}"
+  puts "start_date : #{DateTime.parse(event_details[:start_date]).strftime("%Y-%m-%d")}"
   puts "     title : #{event_details[:title]}"
   puts "  end_date : #{event_details[:end_date]}"
   puts "     notes : #{event_details[:notes]}"
@@ -138,7 +136,7 @@ def create_event(events, new_event)
   events.push(new_event)
 end
 
-def update_event(id, events)
+def update_event(id,events)
   print "date: "
   date = gets.chomp
   print "title: "
@@ -154,25 +152,69 @@ def update_event(id, events)
   guests = gets.chomp
 
   index = events.find_index { |event| event[:id] == id }
-
-  events[index][:start_date] = date
+  
+  events[index][:start_date] = "#{date}T#{start_end[0]}:00-05:00"
   events[index][:title] = title
-  events[index][:end_date] = start_end
+  events[index][:end_date] = "#{date}T#{start_end[1]}:00-05:00"
   events[index][:notes] = notes
   events[index][:guests] = guests
   events[index][:calendar] = calendar
 end
 
+def list(events)
+  today = DateTime.now 
+  days = (today..today+6).to_a 
+  days.map! { |day| day.strftime("%a %b %d")} 
+
+  week ={} 
+  days.each do |day| 
+  week.store(day,[]) 
+  end
+  days.each do |day| 
+    events.each do |event| 
+      date= DateTime.parse(event[:start_date]).strftime("%a %b %d") 
+      if date ==day 
+        week[day].push(event) 
+      end
+    end
+  end
+
+  days.each do |day| #"Sat Aug 13"
+    
+    week[day].each do |event| #week["Sat Aug 13"]
+      
+      date=DateTime.parse(event[:start_date]).strftime("%a %b %d")
+      start_hr=DateTime.parse(event[:start_date]).strftime("%H:%M")
+      if event[:end_date].empty?
+        end_hr = "00:00"
+      else
+        end_hr=DateTime.parse(event[:end_date]).strftime("%H:%M")
+      end
+      format_hr=start_hr + "-" + end_hr
+      title= event[:title]
+      id= event[:id]
+      
+      puts "#{date} #{format_hr} #{title} #{id}" 
+    end
+  end
+
+   
+end
+
+
 # Main Program
 
-list_calendar(events)
+list(events)
 action = nil
 while action != "exit"
   action = print_menu
 
   case action
+
   when "list"
-    list_calendar(events)
+
+   list(events)
+
   when "create"
     print "date: "
     date = gets.chomp
@@ -193,12 +235,12 @@ while action != "exit"
       id: (id = id.next),
       start_date: "#{date}T#{start_end[0]}:00-05:00",
       title: title,
-      end_date: start_end,
+      end_date: "#{date}T#{start_end[1]}:00-05:00",
       notes: notes,
       guests: guests,
       calendar: calendar
     }
-
+    puts new_event[:start_date]
     create_event(events, new_event)
   when "show"
     print "Event Id: "
@@ -207,8 +249,8 @@ while action != "exit"
   when "update"
     print "Event Id: "
     update_id = gets.chomp.to_i
-
-    update_event(id, events)
+    update_event(update_id, events)
+    
   when "delete"
     print "Id: "
     show_id = gets.chomp.to_i
@@ -224,8 +266,3 @@ while action != "exit"
   end
 end
 
-# start_date = events[0][:start_date]
-# fecha = DateTime.parse(start_date)
-# hoy = DateTime.now
-# p fecha
-# p hoy.strftime('%a %b %d')
